@@ -35,7 +35,7 @@ dev_dependencies:
 #### 1. Create a CSV Google Sheet
 
 Create a sheet with your translations. Make sure that all dynamic-arg strings have names of arg. It will generate readable functions of translation to use.
- (following the bellow format, [an example sheet is available here](https://docs.google.com/spreadsheets/d/1hK27E8bIxU8rrOduGJWLTD2QRR1ALs6lyW7dPNZ3N74/edit?usp=sharing)) :
+(following the bellow format, [an example sheet is available here](https://docs.google.com/spreadsheets/d/1hK27E8bIxU8rrOduGJWLTD2QRR1ALs6lyW7dPNZ3N74/edit?usp=sharing)) :
 
 ![google sheet example](./demo/google_sheet.png)
 
@@ -48,7 +48,8 @@ Extract from the link the `DOCID` value : `https://docs.google.com/spreadsheets/
 #### 2. Declare a localization delegate
 
 Declare the following `_Strings` class with the `SheetLocalization` annotation pointing to your sheet in a `lib/localization/strings.dart` file
-``` dart
+
+```dart
 import 'dart:ui';
 
 import 'package:easy_localization_generator/easy_localization_generator.dart';
@@ -79,22 +80,27 @@ class _Strings {}
 
 Run the following command to generate a `lib/localization/strings.g.dart` file :
 
-``` bash
+```bash
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
 Sample of [strings.g.dart](https://github.com/rinlv/easy_localization_generator/blob/main/example/lib/localization/strings.g.dart)
 
 #### 4. Configure your app
+
 Config step by step following this tutorial from [README.md of easy_localization ](https://github.com/aissat/easy_localization/blob/develop/README.md)
 
 #### 5. Development
+
 ##### Simple text
-``` dart
+
+```dart
 Text(Strings.title)
 ```
+
 ##### Text with args
-``` dart
+
+```dart
 Text(
   Strings.msg(
     name: 'Jack',
@@ -102,23 +108,47 @@ Text(
   ),
 ),
 ```
-##### Text with plural
-- no named arg version
-<img src="./demo/plural_1.png" />
 
-``` dart
+##### Text with plural
+
+- no named arg version
+  <img src="./demo/plural_1.png" />
+
+```dart
 Text(Strings.amount(counter))
 ```
-- named arg version (recommend)
-<img src="./demo/plural_2.png" />
 
-``` dart
+- named arg version (recommend)
+  <img src="./demo/plural_2.png" />
+
+```dart
 Text(
   Strings.clicked(
     counter,
     count: counter,
   ),
 ),
+```
+
+### Build your localization.sh
+
+```dart
+#!/bin/bash
+
+# 1. Hapus file atau folder yang terkait dengan easy_localization_generator di dalam .dart_tool/build/generated/
+echo "Menghapus file yang terkait dengan easy_localization_generator..."
+rm -rf .dart_tool
+
+# 2. Jalankan flutter pub get untuk mengambil dependensi
+echo "Menjalankan flutter pub get..."
+flutter pub get
+
+# 3. Jalankan build_runner untuk menghasilkan ulang file
+echo "Menjalankan flutter pub run build_runner build --delete-conflicting-outputs..."
+flutter pub run build_runner build --delete-conflicting-outputs
+
+echo "Proses selesai."
+
 ```
 
 ### ⚡ Regeneration
