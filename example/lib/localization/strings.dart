@@ -11,7 +11,6 @@ part 'strings.g.dart';
   docId: '1hK27E8bIxU8rrOduGJWLTD2QRR1ALs6lyW7dPNZ3N74',
   injectGenerationDateTime: true,
   immediateTranslationEnabled: false,
-  version: 1,
   outDir: 'assets/langs',
   outName: 'langs.csv',
   preservedKeywords: [
